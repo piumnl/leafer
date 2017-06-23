@@ -53,4 +53,8 @@ GitHub: https://github.com/ziwenxie
 Blog: https://www.ziwenxie.site
 Email: ziwenxiecat@gmail.com
 
+## LICENSE
+
+https://github.com/ziwenxie/leafer/blob/master/LICENSE
+
   [1]: https://github.com/ziwenxie/leafer
