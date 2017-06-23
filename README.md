@@ -7,7 +7,7 @@
 ## 部署
 
 ```bash
-$ git clone https://github.com/ziewnxie/leafer
+$ git clone https://github.com/ziwenxie/leafer
 $ cd leafer
 ```
 
@@ -27,7 +27,7 @@ $ mvn spring-boot:run
 
 在浏览器中打开`localhost:8080`使用默认的用户名`admin`以及登录密码`123456`登录即可。
 
-p.s: 如果上面的部署过程中有任何的疑问欢迎在GitHub上反馈 ^_^。
+p.s: 如果上面的部署过程中有任何的疑问欢迎在[GitHub][1]上反馈 ^_^。
 
 ## 功能特性
 
