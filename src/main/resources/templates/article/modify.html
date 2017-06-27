@@ -75,6 +75,10 @@
 
             addTag();
 
+            $('#addTag').on('shown', function(e, editable) {
+                editable.input.$input.val('');
+            });
+
             $("#articleTitle").change(function () {
                 flag = true;
             });

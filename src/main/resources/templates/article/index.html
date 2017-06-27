@@ -105,8 +105,7 @@
                 <div style="margin-top: 10px">
                     <tr th:each="tag : ${article.tags}">
                         <span style="display: none;" th:text="${tag.id}"></span>
-                        <a href="#" class="changeTag"
-                           style="color: #888888;text-decoration: none;">
+                        <a href="#" class="changeTag" style="color: #888888;text-decoration: none;">
                             # <span th:text="' ' + ${tag.name}"></span>&nbsp;&nbsp;
                         </a>
                     </tr>
