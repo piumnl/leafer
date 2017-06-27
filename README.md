@@ -1,5 +1,3 @@
-# DEVELOPING
-
 ## 介绍
 
 `Leafer`是基于Java实现的一个笔记管理项目，现在还是处于beta版本，如果有任何的bug或者功能改进方面上的建议，欢迎大家提issues帮我改进。
