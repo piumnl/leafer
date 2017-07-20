@@ -246,7 +246,7 @@ function displayAllTags(tags) {
         $("#wrapper").toggleClass("toggled");
     });
 
-    $(".changeTag").click(function () {
+    $(document.body).on('click', '.changeTag', function(){
         let tagId = $(this).prev().text();
         getOneTag(tagId);
     });
