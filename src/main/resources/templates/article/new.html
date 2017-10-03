@@ -29,7 +29,10 @@
     <!-- csrf -->
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
     <script src="/js/common.js"></script>
+    <script src="/js/upload.js"></script>
+
     <script>
         window.setInterval(function () {
             $("#addTag").text("");
@@ -37,6 +40,7 @@
         }, 0);
 
         $(document).ready(function () {
+            // https://github.com/NextStepWebs/simplemde-markdown-editor/
             var simplemde = new SimpleMDE({
                 element: document.getElementById("demo"),
                 autofocus: false,
@@ -51,6 +55,10 @@
                 },
                 showIcons: ["code"],
                 status: false,
+            });
+
+            simplemde.codemirror.on('drop', function (editor, e) {
+                upload_img(editor, e, '/api/upload');
             });
 
             addTag();
@@ -91,6 +99,7 @@
 
         });
     </script>
+
     <style>
         @media (min-width: 1200px) {
             .container {

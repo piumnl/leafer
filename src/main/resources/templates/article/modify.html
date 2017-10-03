@@ -31,23 +31,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
-    <style>
-        .tagButton {
-            margin-right: 3px;
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                max-width: 1024px;
-            }
-        }
-        img {
-            max-width: 100%;
-            overflow: hidden;
-        }
-    </style>
+    <!-- csrf -->
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 
     <script src="/js/common.js"></script>
+    <script src="/js/upload.js"></script>
+
     <script>
         window.setInterval(function () {
             $("#addTag").text("");
@@ -55,7 +45,6 @@
         }, 0);
 
         $(document).ready(function () {
-
             // https://github.com/NextStepWebs/simplemde-markdown-editor/
             var simplemde = new SimpleMDE({
                 element: document.getElementById("articleBody"),
@@ -71,6 +60,10 @@
                 },
                 showIcons: ["code"],
                 status: false,
+            });
+
+            simplemde.codemirror.on('drop', function (editor, e) {
+                upload_img(editor, e, '/api/upload');
             });
 
             addTag();
@@ -114,6 +107,22 @@
 
         });
     </script>
+
+    <style>
+        .tagButton {
+            margin-right: 3px;
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1024px;
+            }
+        }
+        img {
+            max-width: 100%;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 

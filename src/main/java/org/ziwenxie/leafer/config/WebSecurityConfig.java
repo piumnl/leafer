@@ -1,6 +1,5 @@
 package org.ziwenxie.leafer.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/resources/**", "druid/**", "/register",
-                        "/css/**", "/js/**").permitAll()
+                        "/css/**", "/js/**", "/upload/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()

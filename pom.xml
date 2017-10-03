@@ -26,6 +26,8 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <!-- https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-hotswapping -->
+        <!-- https://stackoverflow.com/questions/35895730/spring-boot-devtools-static-content-reloading-does-not-work-in-intellij -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
