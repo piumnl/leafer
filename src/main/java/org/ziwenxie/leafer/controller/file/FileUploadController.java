@@ -80,6 +80,7 @@ public class FileUploadController {
 
     //save file
     private void saveUploadedFiles(List<MultipartFile> files) throws IOException {
+        init();
         for (MultipartFile file : files) {
             if (file.isEmpty()) {
                 continue; //next pls
@@ -89,6 +90,14 @@ public class FileUploadController {
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
 
+        }
+    }
+
+    public void init() {
+        try {
+            Files.createDirectory(Paths.get(UPLOADED_FOLDER));
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initialize storage", e);
         }
     }
 }
