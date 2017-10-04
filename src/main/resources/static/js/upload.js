@@ -2,12 +2,12 @@ function upload_img(editor, e, url) {
     var fileList = e.dataTransfer.files;
 
     if (fileList.length > 1){
-        alert('一次只能上传一张图片');
+        alert('only one image is allowed!');
         return false;
     }
 
     if(fileList[0].type.indexOf('image') === -1){
-        alert("不是图片！");
+        alert("not image！");
         return false;
     }
 
@@ -26,7 +26,7 @@ function upload_img(editor, e, url) {
             editor.replaceRange("![](" + data + ")", {line: editor.getCursor().line, ch: editor.getCursor().ch});
         },
         error: function (data) {
-            alert("上传失败")
+            alert("upload failed")
         },
         // add csrf header and token
         beforeSend: function (xhr) {
