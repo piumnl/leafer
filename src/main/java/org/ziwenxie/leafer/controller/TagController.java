@@ -56,7 +56,7 @@ public class TagController {
             Tag tag = new Tag();
             tag.setName(tagName);
             tag.setUsername(principal.getName());
-            tagService.insertOneTag(tag);
+            tagService.insertOneTag(tag, principal.getName());
             return tag;
         }
     }
@@ -68,8 +68,8 @@ public class TagController {
     }
 
     @PostMapping("/tag/delete/{tagId}")
-    public String deleteOneTag(@PathVariable("tagId") long tagId) {
-        tagService.deleteOneTagById(tagId);
+    public String deleteOneTag(@PathVariable("tagId") long tagId, Principal principal) {
+        tagService.deleteOneTagById(tagId, principal.getName());
 
         return "redirect:/";
     }

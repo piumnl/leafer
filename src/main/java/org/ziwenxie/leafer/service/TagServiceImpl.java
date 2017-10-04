@@ -35,7 +35,8 @@ public class TagServiceImpl implements ITagService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean insertOneTag(Tag tag) {
+    @CacheEvict(value = "getAllTags", key = "#username")
+    public boolean insertOneTag(Tag tag, String username) {
         tag.setId(idWorker.nextId());
         tag.setCreatedTime(new Date());
         tag.setModifiedTime(new Date());
@@ -50,7 +51,11 @@ public class TagServiceImpl implements ITagService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteOneTagById(long tagId) {
+    @Caching(evict = {
+            @CacheEvict(value = "getOneTagById", key = "#tagId"),
+            @CacheEvict(value = "getAllTags", key = "#username")
+    })
+    public boolean deleteOneTagById(long tagId, String username) {
         tagMapper.deleteOneTagById(tagId);
 
         logger.info("Delete one tag successfully: " + tagId);
@@ -64,7 +69,7 @@ public class TagServiceImpl implements ITagService {
 
         tagMapper.updateOneTag(tag);
 
-        logger.info("Delete one tag successfully: " + tag.getName());
+        logger.info("Update one tag successfully: " + tag.getName());
         return true;
     }
 
