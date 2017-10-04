@@ -78,9 +78,12 @@ public class FileUploadController {
         return new ResponseEntity(uploadedFileName, HttpStatus.OK);
     }
 
-    //save file
+    // save file
     private void saveUploadedFiles(List<MultipartFile> files) throws IOException {
-        init();
+        if (Files.notExists(Paths.get(UPLOADED_FOLDER))) {
+            init();
+        }
+
         for (MultipartFile file : files) {
             if (file.isEmpty()) {
                 continue; //next pls
