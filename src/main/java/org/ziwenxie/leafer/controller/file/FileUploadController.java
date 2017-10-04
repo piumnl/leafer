@@ -2,8 +2,7 @@ package org.ziwenxie.leafer.controller.file;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +25,13 @@ import java.util.stream.Collectors;
 @RestController
 public class FileUploadController {
 
-    private final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+    private Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
-    // Save the uploaded file to this folder
-    private static String UPLOADED_FOLDER = "./src/main/resources/static/upload/";
+    @Value("${upload.folder}")
+    private String UPLOADED_FOLDER;
 
-    @Autowired
-    Environment environment;
+    @Value("${server.port}")
+    private String port;
 
     // Single file upload
     @PostMapping("/api/upload")
@@ -43,18 +42,15 @@ public class FileUploadController {
             return new ResponseEntity("Please select a file!", HttpStatus.OK);
         }
 
-        String port = environment.getProperty("server.port");
-        String hostAddress =  InetAddress.getLoopbackAddress().getHostAddress();
-
         try {
             String randomPath =  saveUploadedFiles(Arrays.asList(multipartFile));
+            String hostAddress =  InetAddress.getLoopbackAddress().getHostAddress();
             return new ResponseEntity("http://" + hostAddress + ":" + port + "/upload/" +
                     randomPath, new HttpHeaders(), HttpStatus.OK);
 
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
     }
 
     // Multiple file upload
@@ -119,4 +115,3 @@ public class FileUploadController {
     }
 
 }
-
