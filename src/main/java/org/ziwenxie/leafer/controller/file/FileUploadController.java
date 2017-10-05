@@ -43,8 +43,8 @@ public class FileUploadController {
         }
 
         try {
-            String randomPath =  saveUploadedFiles(Arrays.asList(multipartFile));
-            String hostAddress =  InetAddress.getLoopbackAddress().getHostAddress();
+            String randomPath = saveUploadedFiles(Arrays.asList(multipartFile));
+            String hostAddress = InetAddress.getLoopbackAddress().getHostAddress();
             return new ResponseEntity("http://" + hostAddress + ":" + port + "/upload/" +
                     randomPath, new HttpHeaders(), HttpStatus.OK);
 

@@ -11,7 +11,6 @@ import org.ziwenxie.leafer.service.IArticleService;
 import java.security.Principal;
 import java.util.List;
 
-
 @Controller
 public class ArticleController {
 

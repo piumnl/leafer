@@ -1,8 +1,5 @@
 package org.ziwenxie.leafer.util;
 
-
-import org.springframework.stereotype.Component;
-
 public class IdWorker {
 
     private final long workerId;

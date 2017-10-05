@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.ziwenxie.leafer.db.ArticleTagMapper;
 import org.ziwenxie.leafer.model.ArticleTag;
 
-
 @Service("articleTagService")
 public class ArticleTagServiceImpl implements IArticleTagService {
 

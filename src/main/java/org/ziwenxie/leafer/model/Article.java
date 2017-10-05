@@ -1,6 +1,5 @@
 package org.ziwenxie.leafer.model;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

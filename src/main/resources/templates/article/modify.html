@@ -9,27 +9,27 @@
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/css/third/font-awesome.min.css" />
 
     <!-- simplemde -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <link rel="stylesheet" href="/css/third/simplemde.min.css" />
+    <script src="/js/third/simplemde.min.js"></script>
 
     <!-- code syntax highlighting -->
-    <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css" />
+    <script src="/js/third/highlight.min.js"></script>
+    <link rel="stylesheet" href="/css/highlight/styles/googlecode.css" />
 
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!-- jquery-2.2.4 -->
+    <script src="/js/third/jquery-2.2.4.min.js"></script>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- bootstrap-3.3.7 -->
+    <link rel="stylesheet" href="/css/third/bootstrap.min.css" />
+    <script src="/js/third/bootstrap.min.js"></script>
 
-    <!-- x-editable (bootstrap version) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <!-- x-editable-1.5.0 (bootstrap version) -->
+    <link href="/css/third/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="/js/third/bootstrap-editable.min.js"></script>
 
     <!-- csrf -->
     <meta name="_csrf" th:content="${_csrf.token}" />
@@ -104,7 +104,6 @@
                 $("#articleBody").text(simplemde.value());
                 updateArticle();
             }, 3000);
-
         });
     </script>
 
@@ -124,6 +123,7 @@
         }
     </style>
 </head>
+
 <body>
 
 <!-- header -->

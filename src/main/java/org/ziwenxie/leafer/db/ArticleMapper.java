@@ -7,7 +7,6 @@ import org.ziwenxie.leafer.model.Tag;
 
 import java.util.List;
 
-
 @Component
 public interface ArticleMapper {
 

@@ -1,6 +1,5 @@
 package org.ziwenxie.leafer.db;
 
-
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import org.ziwenxie.leafer.model.Article;

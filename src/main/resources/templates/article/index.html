@@ -9,11 +9,12 @@
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 
-    <!-- jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jquery-3.2.1 -->
+    <script src="/js/third/jquery-2.2.4.min.js"></script>
+
+    <!-- bootstrap-3.3.7 -->
+    <link rel="stylesheet" href="/css/third/bootstrap.min.css" />
+    <script src="/js/third/bootstrap.min.js"></script>
 
     <!-- static file -->
     <script src="/js/common.js"></script>
@@ -22,37 +23,16 @@
 
     <script>
         $(document).ready(function () {
-
             $(".next").click(function (event) {
                 let page = $(this).text();
                 paginationArticle(page);
             });
-
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 100) {
-                    $('#back-to-top').fadeIn();
-                } else {
-                    $('#back-to-top').fadeOut();
-                }
-            });
-
-            // scroll body to 0px on click
-            $('#back-to-top').click(function () {
-                $('#back-to-top').tooltip('hide');
-                $('body,html').animate({
-                    scrollTop: 0
-                }, 800);
-                return false;
-            });
-
-            $('#back-to-top').tooltip('show');
-
             getAllTags();
-
         });
     </script>
 
 </head>
+
 <body>
 
 <!-- header -->
