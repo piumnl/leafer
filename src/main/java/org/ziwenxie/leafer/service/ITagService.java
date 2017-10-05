@@ -8,7 +8,6 @@ public interface ITagService {
 
     boolean insertOneTag(Tag tag, String username);
     boolean deleteOneTagById(long tagId, String username);
-    boolean updateOneTag(Tag tag);
     Tag getOneTagById(long tagId);
     Tag getOneTagByName(String tagName, String username);
     List<Tag> getAllTags(String username);

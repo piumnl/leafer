@@ -39,11 +39,9 @@ public class TagServiceImpl implements ITagService {
         tag.setCreatedTime(new Date());
         tag.setModifiedTime(new Date());
 
-        // Predicate<String> findTag = tagName -> tagName.equals(tag.getName());
-        // boolean isExisted = this.getAllTags().stream().map(Tag :: getName).anyMatch(findTag);
         tagMapper.insertOneTag(tag);
 
-        logger.info("Insert one tag successfully: " + tag.getName());
+        logger.info(username + " insert tag " + tag.getId() + " successfully");
         return true;
     }
 
@@ -56,18 +54,7 @@ public class TagServiceImpl implements ITagService {
     public boolean deleteOneTagById(long tagId, String username) {
         tagMapper.deleteOneTagById(tagId);
 
-        logger.info("Delete one tag successfully: " + tagId);
-        return true;
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean updateOneTag(Tag tag) {
-        tag.setModifiedTime(new Date());
-
-        tagMapper.updateOneTag(tag);
-
-        logger.info("Update one tag successfully: " + tag.getName());
+        logger.info(username + " delete tag " + tagId + " successfully");
         return true;
     }
 

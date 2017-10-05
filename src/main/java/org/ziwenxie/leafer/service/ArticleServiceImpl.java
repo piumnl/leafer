@@ -50,7 +50,7 @@ public class ArticleServiceImpl implements IArticleService {
 
         articleMapper.insertOneArticle(article);
 
-        logger.info("Insert one article successfully: " + article.getTitle());
+        logger.info(article.getUsername() + " insert article " + article.getId() + " successfully");
 
         deleteAllPagesCache(article.getUsername());
 
@@ -65,7 +65,7 @@ public class ArticleServiceImpl implements IArticleService {
     })
     public boolean deleteOneArticleById(long articleId, String username) {
         articleMapper.deleteOneArticleById(articleId);
-        logger.info("Delete one article successfully: " + articleId);
+        logger.info(username + " delete article " + articleId + " successfully");
 
         deleteAllPagesCache(username);
 
@@ -83,7 +83,7 @@ public class ArticleServiceImpl implements IArticleService {
         article.setModifiedTime(new Date());
 
         articleMapper.updateOneArticle(article);
-        logger.info("Update one article successfully: " + article.getTitle());
+        logger.info(username + " update article " + article.getId() + " successfully");
 
         return true;
     }
@@ -124,7 +124,6 @@ public class ArticleServiceImpl implements IArticleService {
 
         return page;
     }
-
 
     private void deleteAllPagesCache(String username) {
         long pages = articleMapper.getArticlesCount(username)/10 + 1;

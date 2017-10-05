@@ -28,9 +28,9 @@ public class ArticleTagServiceImpl implements IArticleTagService {
             @CacheEvict(value = "getOneArticleById", key = "#articleTag.articleId"),
             @CacheEvict(value = "getOneTagById", key = "#articleTag.tagId")
     })
-    public boolean insertOneArticleTag(ArticleTag articleTag) {
+    public boolean insertOneArticleTag(ArticleTag articleTag, String username) {
         articleTagMapper.insertOneArticleTag(articleTag);
-        logger.info("Insert articleTag: " + articleTag.toString() + "successfully");
+        logger.info(username + " insert articleTag " + articleTag.toString() + " successfully");
         return true;
     }
 
@@ -40,9 +40,9 @@ public class ArticleTagServiceImpl implements IArticleTagService {
             @CacheEvict(value = "getOneArticleById", key = "#articleTag.articleId"),
             @CacheEvict(value = "getOneTagById", key = "#articleTag.tagId")
     })
-    public boolean deleteOneArticleTag(ArticleTag articleTag) {
+    public boolean deleteOneArticleTag(ArticleTag articleTag, String username) {
         articleTagMapper.deleteOneArticleTag(articleTag);
-        logger.info("Delete articleTag: " + articleTag.toString() + "successfully");
+        logger.info(username + " delete articleTag " + articleTag.toString() + " successfully");
         return true;
     }
 

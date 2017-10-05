@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.ziwenxie.leafer.model.ArticleTag;
 import org.ziwenxie.leafer.service.IArticleTagService;
 
+import java.security.Principal;
+
 @Controller
 public class ArticleTagController {
 
@@ -20,17 +22,16 @@ public class ArticleTagController {
 
     @ResponseBody
     @PostMapping("/articleTag/new")
-    public ArticleTag newArticleTag(@RequestBody ArticleTag articleTag) {
-        articleTagService.insertOneArticleTag(articleTag);
+    public ArticleTag newArticleTag(@RequestBody ArticleTag articleTag, Principal principal) {
+        articleTagService.insertOneArticleTag(articleTag, principal.getName());
 
         return articleTag;
-
     }
 
     @ResponseBody
     @PostMapping("/articleTag/delete")
-    public ArticleTag deleteArticleTag(@RequestBody ArticleTag articleTag) {
-        articleTagService.deleteOneArticleTag(articleTag);
+    public ArticleTag deleteArticleTag(@RequestBody ArticleTag articleTag, Principal principal) {
+        articleTagService.deleteOneArticleTag(articleTag, principal.getName());
 
         return articleTag;
     }
