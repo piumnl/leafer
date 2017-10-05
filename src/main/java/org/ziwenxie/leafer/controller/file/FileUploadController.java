@@ -30,6 +30,9 @@ public class FileUploadController {
     @Value("${upload.folder}")
     private String UPLOADED_FOLDER;
 
+    @Value("${upload.server.address}")
+    private String serverAddress;
+
     @Value("${server.port}")
     private String port;
 
@@ -44,9 +47,7 @@ public class FileUploadController {
 
         try {
             String randomPath = saveUploadedFiles(Arrays.asList(multipartFile));
-            String hostAddress = InetAddress.getLoopbackAddress().getHostAddress();
-            return new ResponseEntity("http://" + hostAddress + ":" + port + "/upload/" +
-                    randomPath, new HttpHeaders(), HttpStatus.OK);
+            return new ResponseEntity(serverAddress + "/leafer/" + randomPath, new HttpHeaders(), HttpStatus.OK);
 
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
