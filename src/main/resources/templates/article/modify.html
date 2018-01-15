@@ -140,7 +140,7 @@
         <!-- tag -->
         <div>
             <!-- show tags -->
-            <button class="btn btn-default btn-sm tagButton" th:each="tag : ${tags}">
+            <button class="btn btn-default btn-sm tagButton" th:each="tag : ${article.tags}">
                 <!-- tag name -->
                 <a th:href="@{'/tag/' + ${tag.id}}" th:text="' ' + ${tag.name} + ' '"></a>
 
