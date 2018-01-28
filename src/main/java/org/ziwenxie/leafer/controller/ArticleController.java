@@ -55,10 +55,8 @@ public class ArticleController {
     @GetMapping(value = "/article/modify/{articleId}")
     public String updateArticle(@PathVariable long articleId, ModelMap modelMap, Principal principal) {
         Article article = articleService.getOneArticleById(articleId, principal.getName());
-        List<Tag> tags = articleService.getAllTagsOfOneArticle(articleId);
 
         modelMap.addAttribute("article", article);
-        modelMap.addAttribute("tags", tags);
 
         return "article/modify";
     }
