@@ -1,7 +1,9 @@
 package org.ziwenxie.leafer.db;
 
 import org.apache.ibatis.annotations.*;
+
 import org.springframework.stereotype.Component;
+
 import org.ziwenxie.leafer.model.Article;
 import org.ziwenxie.leafer.model.Tag;
 
@@ -42,28 +44,28 @@ public interface ArticleMapper {
     void updateOneArticle(@Param("article") Article article);
 
     @Select(getArticlesOfOnePage)
-    @Results(value={
-            @Result(property="id", column="id"),
-            @Result(property="title", column="title"),
-            @Result(property="body", column="body"),
+    @Results(value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "body", column = "body"),
             @Result(property = "createdTime", column = "created_time"),
             @Result(property = "modifiedTime", column = "modified_time"),
-            @Result(property="username", column="username"),
-            @Result(property="tags", column="id", many=@Many(
-                    select="org.ziwenxie.leafer.db.ArticleMapper.getAllTagsOfOneArticle")),
+            @Result(property = "username", column = "username"),
+            @Result(property = "tags", column = "id", many = @Many(
+                    select = "org.ziwenxie.leafer.db.ArticleMapper.getAllTagsOfOneArticle")),
     })
     List<Article> getArticlesOfOnePage(@Param("username") String username, @Param("begin") int begin);
 
     @Select(getOneArticleById)
-    @Results(value={
-            @Result(property="id", column="id"),
-            @Result(property="title", column="title"),
-            @Result(property="body", column="body"),
+    @Results(value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "body", column = "body"),
             @Result(property = "createdTime", column = "created_time"),
             @Result(property = "modifiedTime", column = "modified_time"),
-            @Result(property="username", column="username"),
-            @Result(property="tags", column="id", many=@Many(
-                    select="org.ziwenxie.leafer.db.ArticleMapper.getAllTagsOfOneArticle")),
+            @Result(property = "username", column = "username"),
+            @Result(property = "tags", column = "id", many = @Many(
+                    select = "org.ziwenxie.leafer.db.ArticleMapper.getAllTagsOfOneArticle")),
     })
     Article getOneArticleById(@Param("id") long id);
 

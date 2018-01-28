@@ -1,3 +1,5 @@
+USE leafer;
+
 CREATE TABLE `user` (
   `id` bigint(64) unsigned NOT NULL,
   `username` varchar(20) NOT NULL,

@@ -2,13 +2,21 @@ package org.ziwenxie.leafer.controller.file;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -36,18 +45,36 @@ public class FileUploadController {
     @Value("${server.port}")
     private String port;
 
+    private final ResourceLoader resourceLoader;
+
+    @Autowired
+    public FileUploadController(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/img/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+        try {
+            String location = "file:" + Paths.get(UPLOADED_FOLDER, filename).toAbsolutePath().toString();
+            return ResponseEntity.ok(resourceLoader.getResource(location));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Single file upload
     @PostMapping("/api/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile multipartFile) {
         logger.debug("Single file upload!");
 
         if (multipartFile.isEmpty()) {
-            return new ResponseEntity("Please select a file!", HttpStatus.OK);
+            return new ResponseEntity<>("Please select a file!", HttpStatus.OK);
         }
 
         try {
-            String randomPath = saveUploadedFiles(Arrays.asList(multipartFile));
-            return new ResponseEntity(serverAddress + "/leafer/" + randomPath, new HttpHeaders(), HttpStatus.OK);
+            String randomPath = saveUploadedFiles(Collections.singletonList(multipartFile));
+            return new ResponseEntity<>(serverAddress + "/img/" + randomPath, new HttpHeaders(), HttpStatus.OK);
 
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -59,11 +86,14 @@ public class FileUploadController {
     public ResponseEntity<?> uploadFileMulti(@RequestParam("files") MultipartFile[] multipartFiles) {
         logger.debug("Multiple file upload!");
 
-        String uploadedFileName = Arrays.stream(multipartFiles).map(x -> x.getOriginalFilename())
-                .filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
+        String uploadedFileName =
+                Arrays.stream(multipartFiles)
+                      .map(MultipartFile::getOriginalFilename)
+                      .filter(x -> !StringUtils.isEmpty(x))
+                      .collect(Collectors.joining(" , "));
 
         if (StringUtils.isEmpty(uploadedFileName)) {
-            return new ResponseEntity("please select a file!", HttpStatus.OK);
+            return new ResponseEntity<>("please select a file!", HttpStatus.OK);
         }
 
         try {
@@ -72,7 +102,7 @@ public class FileUploadController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity(uploadedFileName, HttpStatus.OK);
+        return new ResponseEntity<>(uploadedFileName, HttpStatus.OK);
     }
 
     // Save single file
@@ -97,6 +127,8 @@ public class FileUploadController {
 
             Path path = Paths.get(UPLOADED_FOLDER + randomPath);
             Files.write(path, bytes);
+
+            logger.info("save upload file: {}", randomPath);
         }
 
         return randomPath;
@@ -111,8 +143,7 @@ public class FileUploadController {
     }
 
     public static String generateRandomPath() {
-        String path = UUID.randomUUID().toString().replace("-", "");
-        return path;
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
 }
